@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: cz.inseo.netbeans.github
+OpenIDE-Module-Layer: cz/inseo/netbeans/github/layer.xml
+OpenIDE-Module-Localizing-Bundle: cz/inseo/netbeans/github/Bundle.properties
+OpenIDE-Module-Specification-Version: 0.1
+

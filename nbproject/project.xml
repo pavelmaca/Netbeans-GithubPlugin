@@ -7,6 +7,10 @@
             <standalone/>
             <module-dependencies/>
             <public-packages/>
+            <class-path-extension>
+                <runtime-relative-path>ext/github-java-sdk.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/github-java-sdk.jar</binary-origin>
+            </class-path-extension>
         </data>
     </configuration>
 </project>

@@ -1,1 +1,11 @@
+
+#Netbeans
 /nbproject/private/
+/nbproject/genfiles.properties
+
+#Java
+*.class
+
+# Windows
+Thumbs.db
+Desktop.ini

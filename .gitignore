@@ -5,6 +5,7 @@
 
 #Java
 *.class
+/build/
 
 # Windows
 Thumbs.db

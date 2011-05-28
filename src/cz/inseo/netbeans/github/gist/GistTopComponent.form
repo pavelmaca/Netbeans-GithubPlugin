@@ -69,8 +69,8 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="gistTree">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(root)"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DefaultMutableTreeNode root = new DefaultMutableTreeNode(&quot;My gists&quot;);&#xa;DefaultMutableTreeNode child1 = new DefaultMutableTreeNode(&quot;875191... Netbeans Github plugin - kroky v&#xfd;voje&quot;);&#xa;root.add(child1);&#xa;DefaultMutableTreeNode child2 = new DefaultMutableTreeNode(&quot;942485 jQuery AJAX Queue&quot;);&#xa;root.add(child2);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="gTree.getTree()"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="GistTree gTree = new GistTree();"/>
           </AuxValues>
         </Component>
       </SubComponents>

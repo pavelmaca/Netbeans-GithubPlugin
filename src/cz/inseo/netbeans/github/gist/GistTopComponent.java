@@ -1,17 +1,14 @@
 package cz.inseo.netbeans.github.gist;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeModel;
+import cz.inseo.netbeans.github.gist.tree.GistTree;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
-import org.openide.windows.WindowManager;
+
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+
+import cz.inseo.netbeans.github.gist.tree.GistTree;
 
 /**
  * Top component which displays something.
@@ -27,31 +24,14 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_GistAction",
 preferredID = "GistTopComponent")
 public final class GistTopComponent extends TopComponent {
-
-	private Icon customOpenIcon;
-	/*private Icon customClosedIcon = new ImageIcon("images/Circle_2.gif");
-	private Icon customLeafIcon = new ImageIcon("images/Circle_3.gif");*/
-  
-	public GistTopComponent(){
 		
+	public GistTopComponent(){
 		initComponents();
 		setName(NbBundle.getMessage(GistTopComponent.class, "CTL_GistTopComponent"));
 		setToolTipText(NbBundle.getMessage(GistTopComponent.class, "HINT_GistTopComponent"));
-		
-		//setup icons for tree
-		java.net.URL gIconURL  = getClass().getResource("/cz/inseo/netbeans/github/resources/images/g-icon.png");
-		ImageIcon gIcon = new ImageIcon(gIconURL);
-		java.net.URL gistIconURL  = getClass().getResource("/cz/inseo/netbeans/github/resources/images/paste.png");
-		ImageIcon gistIcon = new ImageIcon(gistIconURL);
-		
-		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-		renderer.setOpenIcon(gIcon);
-		renderer.setClosedIcon(gIcon);
-		renderer.setLeafIcon(gistIcon);
-		gistTree.setCellRenderer(renderer);
-		
+				
 	}
-
+	
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -63,12 +43,8 @@ public final class GistTopComponent extends TopComponent {
         newButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("My gists");
-        DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("875191... Netbeans Github plugin - kroky vývoje");
-        root.add(child1);
-        DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("942485 jQuery AJAX Queue");
-        root.add(child2);
-        gistTree = new javax.swing.JTree(root);
+        GistTree gTree = new GistTree();
+        gistTree = gTree.getTree();
 
         org.openide.awt.Mnemonics.setLocalizedText(newButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.newButton.text")); // NOI18N
 

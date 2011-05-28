@@ -102,8 +102,8 @@
             </module-dependencies>
             <public-packages/>
             <class-path-extension>
-                <runtime-relative-path>ext/github-java-sdk.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/github-java-sdk.jar</binary-origin>
+                <runtime-relative-path>ext/github-java-core-3.0.1-SNAPSHOT.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/github-java-core-3.0.1-SNAPSHOT.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/gson-1.7.1.jar</runtime-relative-path>

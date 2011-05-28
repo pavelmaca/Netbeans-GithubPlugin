@@ -1,5 +1,11 @@
 package cz.inseo.netbeans.github.gist;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreeModel;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -22,11 +28,28 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 preferredID = "GistTopComponent")
 public final class GistTopComponent extends TopComponent {
 
-	public GistTopComponent() {
+	private Icon customOpenIcon;
+	/*private Icon customClosedIcon = new ImageIcon("images/Circle_2.gif");
+	private Icon customLeafIcon = new ImageIcon("images/Circle_3.gif");*/
+  
+	public GistTopComponent(){
+		
 		initComponents();
 		setName(NbBundle.getMessage(GistTopComponent.class, "CTL_GistTopComponent"));
 		setToolTipText(NbBundle.getMessage(GistTopComponent.class, "HINT_GistTopComponent"));
-
+		
+		//setup icons for tree
+		java.net.URL gIconURL  = getClass().getResource("/cz/inseo/netbeans/github/resources/images/g-icon.png");
+		ImageIcon gIcon = new ImageIcon(gIconURL);
+		java.net.URL gistIconURL  = getClass().getResource("/cz/inseo/netbeans/github/resources/images/paste.png");
+		ImageIcon gistIcon = new ImageIcon(gistIconURL);
+		
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		renderer.setOpenIcon(gIcon);
+		renderer.setClosedIcon(gIcon);
+		renderer.setLeafIcon(gistIcon);
+		gistTree.setCellRenderer(renderer);
+		
 	}
 
 	/** This method is called from within the constructor to
@@ -37,19 +60,54 @@ public final class GistTopComponent extends TopComponent {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        newButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("My gists");
+        DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("875191... Netbeans Github plugin - kroky vývoje");
+        root.add(child1);
+        DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("942485 jQuery AJAX Queue");
+        root.add(child2);
+        gistTree = new javax.swing.JTree(root);
+
+        org.openide.awt.Mnemonics.setLocalizedText(newButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.newButton.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(refreshButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.refreshButton.text")); // NOI18N
+
+        jScrollPane1.setViewportView(gistTree);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(newButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(refreshButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newButton)
+                    .addComponent(refreshButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree gistTree;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton newButton;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
 	@Override
 	public void componentOpened() {

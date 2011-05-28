@@ -102,32 +102,12 @@
             </module-dependencies>
             <public-packages/>
             <class-path-extension>
-                <runtime-relative-path>ext/commons-logging-1.1.1.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/commons-logging-1.1.1.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/org.eclipse.egit.github.core_1.0.0.201105261413.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/org.eclipse.egit.github.core_1.0.0.201105261413.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/org.eclipse.mylyn.github.core_1.0.0.201105261413.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/org.eclipse.mylyn.github.core_1.0.0.201105261413.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/org.apache.httpcomponents.httpclient_4.1.0.v201103311320.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/org.apache.httpcomponents.httpclient_4.1.0.v201103311320.jar</binary-origin>
+                <runtime-relative-path>ext/github-java-sdk.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/github-java-sdk.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/gson-1.7.1.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/gson-1.7.1.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/org.eclipse.mylyn.github.ui_1.0.0.201105261413.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/org.eclipse.mylyn.github.ui_1.0.0.201105261413.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/org.apache.httpcomponents.httpcore_4.1.0.v201101201700.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/org.apache.httpcomponents.httpcore_4.1.0.v201101201700.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

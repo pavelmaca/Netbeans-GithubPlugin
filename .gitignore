@@ -6,8 +6,10 @@
 #Java
 *.class
 /build/
-/src/cz/inseo/netbeans/github/OAuth.java
 
 # Windows
 Thumbs.db
 Desktop.ini
+
+# private files
+/src/cz/inseo/netbeans/github/oauthKeys.xml

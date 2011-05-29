@@ -21,14 +21,14 @@ final class GithubPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        loginText = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        userNameText = new javax.swing.JTextField();
+        userNameLabel = new javax.swing.JLabel();
         authenticateButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        loginText.setText(org.openide.util.NbBundle.getMessage(GithubPanel.class, "GithubPanel.loginText.text")); // NOI18N
+        userNameText.setText(org.openide.util.NbBundle.getMessage(GithubPanel.class, "GithubPanel.userNameText.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(GithubPanel.class, "GithubPanel.jLabel1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(userNameLabel, org.openide.util.NbBundle.getMessage(GithubPanel.class, "GithubPanel.userNameLabel.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(authenticateButton, org.openide.util.NbBundle.getMessage(GithubPanel.class, "GithubPanel.authenticateButton.text")); // NOI18N
         authenticateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -43,9 +43,9 @@ final class GithubPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(userNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginText, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(authenticateButton))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
@@ -55,8 +55,8 @@ final class GithubPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(loginText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameLabel)
+                    .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(authenticateButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -83,18 +83,18 @@ final class GithubPanel extends javax.swing.JPanel {
 	private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authenticateButtonActionPerformed
 		boolean status = GithubOptions.getInstance().tryAuthenttcate();
 		if(!status){
-			loginText.setForeground(Color.red);
+			userNameText.setForeground(Color.red);
 		}else{
-			loginText.setForeground(Color.black);
+			userNameText.setForeground(Color.black);
 		}
 	}//GEN-LAST:event_authenticateButtonActionPerformed
 
 	void load() {
-		loginText.setText(GithubOptions.getInstance().getLogin());
+		userNameText.setText(GithubOptions.getInstance().getLogin());
 	}
 
 	void store() {
-		GithubOptions.getInstance().setLogin(loginText.getText());
+		GithubOptions.getInstance().setLogin(userNameText.getText());
 	}
 
 	boolean valid() {
@@ -103,9 +103,9 @@ final class GithubPanel extends javax.swing.JPanel {
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton authenticateButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField loginText;
+    private javax.swing.JLabel userNameLabel;
+    private javax.swing.JTextField userNameText;
     // End of variables declaration//GEN-END:variables
 }

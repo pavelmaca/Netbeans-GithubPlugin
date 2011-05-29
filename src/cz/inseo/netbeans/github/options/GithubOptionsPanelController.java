@@ -6,7 +6,6 @@ import javax.swing.JComponent;
 import org.netbeans.spi.options.OptionsPanelController;
 import org.openide.util.HelpCtx;
 import org.openide.util.Lookup;
-import org.openide.util.NbPreferences;
 
 @OptionsPanelController.SubRegistration(location = "Advanced",
 displayName = "#AdvancedOption_DisplayName_Github",

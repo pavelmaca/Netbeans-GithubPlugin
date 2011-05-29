@@ -16,6 +16,19 @@ import org.openide.util.Exceptions;
  */
 public class GithubAuth {
 
+	private static void processException(RequestException ex) {
+		String message;
+		switch (ex.getStatus()) {
+			case 401:
+				message = "Incorrect login";
+				break;
+			default:
+				message = "Unknown status code: " + Integer.toString(ex.getStatus());
+				break;
+		}
+		InfoDialog.showInfo(message);
+	}
+
 	public static boolean tryLogin() {
 		GitHubClient client = new GitHubClient();
 		client.setCredentials(GithubOptions.getInstance().getLogin(), GithubOptions.getInstance().getPassword());
@@ -24,20 +37,16 @@ public class GithubAuth {
 			List<Gist> gists = gistService.getGists(GithubOptions.getInstance().getLogin());
 			return true;
 		} catch (RequestException ex) {
-			String message;
-			switch (ex.getStatus()) {
-				case 401:
-					message = "Incorrect login";
-					break;
-				default:
-					message = "Unknown status code: " + Integer.toString(ex.getStatus());
-					break;
-			}
-			InfoDialog.showInfo(message);
+			processException(ex);
 		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
 		}
-		
 		return false;
+	}
+
+	public static GistService getGistService() {
+		GitHubClient client = new GitHubClient();
+		client.setCredentials(GithubOptions.getInstance().getLogin(), GithubOptions.getInstance().getPassword());
+		return new GistService(client);
 	}
 }

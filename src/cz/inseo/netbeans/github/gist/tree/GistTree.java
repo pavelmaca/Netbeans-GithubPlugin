@@ -1,7 +1,8 @@
 package cz.inseo.netbeans.github.gist.tree;
 
-import cz.inseo.netbeans.github.tools.Browser;
-import java.net.URISyntaxException;
+import cz.inseo.netbeans.github.GithubAuth;
+import cz.inseo.netbeans.github.options.GithubOptions;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -11,6 +12,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.service.GistService;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 
@@ -18,8 +21,6 @@ import org.openide.util.NbBundle;
  *
  * @author Pavel
  */
-
-
 public class GistTree {
 
 	public static final ImageIcon ICON_ROOT = new ImageIcon(GistTree.class.getResource("/cz/inseo/netbeans/github/resources/images/g-icon.png"));
@@ -36,36 +37,34 @@ public class GistTree {
 
 		//create nodes
 		DefaultMutableTreeNode node;
-/*
-		GitHubServiceFactory factory = GitHubServiceFactory.newInstance();
-		OAuthService OAuthService = factory.createOAuthService("", "");
-		String authorizationUrl = OAuthService.getAuthorizationUrl(null);
+
+
+
+		GistService gistService = GithubAuth.getGistService();
+
+		List<Gist> gists;
 		try {
-			Browser.openUrl(authorizationUrl);
-		} catch (URISyntaxException ex) {
+			gists = gistService.getGists(GithubOptions.getInstance().getLogin());
+			for (Iterator<Gist> it = gists.iterator(); it.hasNext();) {
+				Gist gist = it.next();
+
+				ImageIcon icon;
+
+				if (gist.isPublic() == true) {
+					icon = ICON_PUBLIC;
+				} else {
+					icon = ICON_PRIVATE;
+				}
+
+				node = new DefaultMutableTreeNode(new IconData(icon, null, new GistNode(gist)));
+				top.add(node);
+				node.add(new DefaultMutableTreeNode(true));
+
+			}
+		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
 		}
-	
-	
-		GistService gistService = factory.createGistService();
 
-		List<Gist> gists = gistService.getUserGists("PavelMacaDev");
-		for (Iterator<Gist> it = gists.iterator(); it.hasNext();) {
-			Gist gist = it.next();
-
-			ImageIcon icon;
-
-			if (gist.getVisibility() == Gist.Visibility.PUBLIC) {
-				icon = ICON_PUBLIC;
-			} else {
-				icon = ICON_PRIVATE;
-			}
-
-			node = new DefaultMutableTreeNode(new IconData(icon, null, new GistNode(gist)));
-			top.add(node);
-			node.add(new DefaultMutableTreeNode(true));
-
-		}*/
 
 		m_model = new DefaultTreeModel(top);
 		m_tree = new JTree(m_model);

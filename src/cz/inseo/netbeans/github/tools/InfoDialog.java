@@ -1,9 +1,6 @@
 package cz.inseo.netbeans.github.tools;
 
-import java.awt.Dialog;
-import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
-import org.openide.NotificationLineSupport;
 import org.openide.NotifyDescriptor;
 
 /**

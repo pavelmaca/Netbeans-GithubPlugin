@@ -1,7 +1,6 @@
 package cz.inseo.netbeans.github.gist.tree;
 
-import com.github.api.v2.schema.File;
-
+import org.eclipse.egit.github.core.GistFile;
 
 
 /**
@@ -10,13 +9,13 @@ import com.github.api.v2.schema.File;
  */
 public class FileNode {
 	
-	private File m_file;
+	private GistFile m_file;
 	
-	public FileNode(File file) {
+	public FileNode(GistFile file) {
 		m_file = file;
 	}
 	
-	public File getFile(){
+	public GistFile getFile(){
 		return m_file;
 	}
 	

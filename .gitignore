@@ -10,6 +10,3 @@
 # Windows
 Thumbs.db
 Desktop.ini
-
-# private files
-/src/cz/inseo/netbeans/github/oauthKeys.xml

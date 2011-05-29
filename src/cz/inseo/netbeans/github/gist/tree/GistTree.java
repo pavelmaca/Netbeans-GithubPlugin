@@ -1,9 +1,5 @@
 package cz.inseo.netbeans.github.gist.tree;
 
-import com.github.api.v2.schema.Gist;
-import com.github.api.v2.services.GistService;
-import com.github.api.v2.services.GitHubServiceFactory;
-import com.github.api.v2.services.OAuthService;
 import cz.inseo.netbeans.github.tools.Browser;
 import java.net.URISyntaxException;
 import java.util.Iterator;
@@ -40,10 +36,10 @@ public class GistTree {
 
 		//create nodes
 		DefaultMutableTreeNode node;
-
+/*
 		GitHubServiceFactory factory = GitHubServiceFactory.newInstance();
 		OAuthService OAuthService = factory.createOAuthService("", "");
-		String authorizationUrl = OAuthService.getAuthorizationUrl("PavelMacaDev");
+		String authorizationUrl = OAuthService.getAuthorizationUrl(null);
 		try {
 			Browser.openUrl(authorizationUrl);
 		} catch (URISyntaxException ex) {
@@ -69,7 +65,7 @@ public class GistTree {
 			top.add(node);
 			node.add(new DefaultMutableTreeNode(true));
 
-		}
+		}*/
 
 		m_model = new DefaultTreeModel(top);
 		m_tree = new JTree(m_model);

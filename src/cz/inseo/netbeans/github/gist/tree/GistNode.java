@@ -1,11 +1,11 @@
 package cz.inseo.netbeans.github.gist.tree;
 
-import com.github.api.v2.schema.File;
-import com.github.api.v2.schema.Gist;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 import javax.swing.tree.DefaultMutableTreeNode;
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.GistFile;
 
 
 /**
@@ -36,8 +36,8 @@ public class GistNode {
 			return false;      // Already expanded
 		}
 		parent.removeAllChildren();  // Remove Flag
-
-		Map<String, File> files = m_gist.getFiles();
+		
+		Map<String, GistFile> files = m_gist.getFiles();
 		if (files.isEmpty()) {
 			return true;
 		}
@@ -63,6 +63,6 @@ public class GistNode {
 
 	@Override
 	public String toString() {
-		return m_gist.getRepo()+( m_gist.getDescription() != null ? ": "+m_gist.getDescription() : "");
+		return m_gist.getId()+( m_gist.getDescription() != null ? ": "+m_gist.getDescription() : "");
 	}
 }

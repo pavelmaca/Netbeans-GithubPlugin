@@ -44,7 +44,7 @@ public final class GistTopComponent extends TopComponent {
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         GistTree gTree = new GistTree();
-        gistTree = gTree.getTree();
+        gistTree = new javax.swing.JTree();
 
         org.openide.awt.Mnemonics.setLocalizedText(newButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.newButton.text")); // NOI18N
 

@@ -69,7 +69,6 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="gistTree">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="gTree.getTree()"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="GistTree gTree = new GistTree();"/>
           </AuxValues>
         </Component>

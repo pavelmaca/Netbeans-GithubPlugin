@@ -1,5 +1,6 @@
 package cz.inseo.netbeans.github.gist.tree;
 
+import cz.inseo.netbeans.github.tools.InfoDialog;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -46,9 +47,9 @@ public class IconCellRenderer extends JLabel implements TreeCellRenderer {
 				(DefaultMutableTreeNode) value;
 		Object obj = node.getUserObject();
 		setText(obj.toString());
-
+				
 		if (obj instanceof Boolean) {
-			setText("Retrieving data...");
+		//	setText("Retrieving data...");
 		}
 
 		if (obj instanceof IconData) {

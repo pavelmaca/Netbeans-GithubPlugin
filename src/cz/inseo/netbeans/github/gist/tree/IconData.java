@@ -36,6 +36,7 @@ public class IconData {
 		return m_data;
 	}
 
+	@Override
 	public String toString() {
 		return m_data.toString();
 	}

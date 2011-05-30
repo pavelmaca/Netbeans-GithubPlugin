@@ -1,6 +1,7 @@
 package cz.inseo.netbeans.github.gist.tree;
 
 import org.eclipse.egit.github.core.GistFile;
+import org.openide.util.Exceptions;
 
 
 /**

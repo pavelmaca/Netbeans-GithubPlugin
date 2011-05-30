@@ -1,5 +1,7 @@
 package cz.inseo.netbeans.github.gist;
 
+import cz.inseo.netbeans.github.GithubAuth;
+import cz.inseo.netbeans.github.gist.tree.GistNode;
 import cz.inseo.netbeans.github.gist.tree.GistTree;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
@@ -9,6 +11,18 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 
 import cz.inseo.netbeans.github.gist.tree.GistTree;
+import cz.inseo.netbeans.github.gist.tree.IconData;
+import cz.inseo.netbeans.github.options.GithubOptions;
+import cz.inseo.netbeans.github.tools.InfoDialog;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.service.GistService;
+import org.openide.util.Exceptions;
 
 /**
  * Top component which displays something.
@@ -44,11 +58,16 @@ public final class GistTopComponent extends TopComponent {
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         GistTree gTree = new GistTree();
-        gistTree = new javax.swing.JTree();
+        gistTree = gTree.getTree();
 
         org.openide.awt.Mnemonics.setLocalizedText(newButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.newButton.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(refreshButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.refreshButton.text")); // NOI18N
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(gistTree);
 
@@ -78,6 +97,41 @@ public final class GistTopComponent extends TopComponent {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+	private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+		String title = NbBundle.getMessage(GistTree.class, "GistTree.title");
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode(new IconData(GistTree.ICON_ROOT, null, title));
+
+		DefaultTreeModel m_model = new DefaultTreeModel(top);
+		
+		DefaultMutableTreeNode node;
+		GistService gistService = GithubAuth.getGistService();
+
+		List<Gist> gists;
+		try {
+			gists = gistService.getGists(GithubOptions.getInstance().getLogin());
+			for (Iterator<Gist> it = gists.iterator(); it.hasNext();) {
+				Gist gist = it.next();
+
+				ImageIcon icon;
+
+				if (gist.isPublic() == true) {
+					icon = GistTree.ICON_PUBLIC;
+				} else {
+					icon =  GistTree.ICON_PRIVATE;
+				}
+
+				node = new DefaultMutableTreeNode(new IconData(icon, null, new GistNode(gist)));
+				top.add(node);
+				node.add(new DefaultMutableTreeNode(true));
+
+			}
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		}
+		
+		gistTree.setModel(m_model);
+	}//GEN-LAST:event_refreshButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree gistTree;

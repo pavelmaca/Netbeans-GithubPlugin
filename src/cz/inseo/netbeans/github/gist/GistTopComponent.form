@@ -59,6 +59,9 @@
           <ResourceString bundle="cz/inseo/netbeans/github/gist/Bundle.properties" key="GistTopComponent.refreshButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -69,6 +72,7 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="gistTree">
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="gTree.getTree()"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="GistTree gTree = new GistTree();"/>
           </AuxValues>
         </Component>

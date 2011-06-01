@@ -72,8 +72,11 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="gistTree">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="gTree.getTree()"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="GistTree gTree = new GistTree();"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.gistTree = (GistsTree) gistTree;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new GistsTree(title, userName)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="String title = NbBundle.getMessage(GistTopComponent.class, &quot;GistTopComponent.gistTree.root.title&quot;);&#xa;String userName = GithubOptions.getInstance().getLogin();"/>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
           </AuxValues>
         </Component>
       </SubComponents>

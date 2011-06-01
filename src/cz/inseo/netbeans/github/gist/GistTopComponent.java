@@ -1,28 +1,16 @@
 package cz.inseo.netbeans.github.gist;
 
-import cz.inseo.netbeans.github.GithubAuth;
-import cz.inseo.netbeans.github.gist.tree.GistNode;
-import cz.inseo.netbeans.github.gist.tree.GistTree;
+import cz.inseo.netbeans.github.gist.tree.IconCellRenderer;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
-
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
-
-import cz.inseo.netbeans.github.gist.tree.GistTree;
-import cz.inseo.netbeans.github.gist.tree.IconData;
-import cz.inseo.netbeans.github.options.GithubOptions;
-import cz.inseo.netbeans.github.tools.InfoDialog;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.service.GistService;
-import org.openide.util.Exceptions;
+import javax.swing.tree.TreeCellRenderer;
+import cz.inseo.netbeans.github.gist.tree.GistsTree;
+import cz.inseo.netbeans.github.options.GithubOptions;
 
 /**
  * Top component which displays something.
@@ -30,22 +18,23 @@ import org.openide.util.Exceptions;
 @ConvertAsProperties(dtd = "-//cz.inseo.netbeans.github.gist//Gist//EN",
 autostore = false)
 @TopComponent.Description(preferredID = "GistTopComponent",
-//iconBase="SET/PATH/TO/ICON/HERE", 
+iconBase="/cz/inseo/netbeans/github/resources/images/g-icon.png", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "rightSlidingSide", openAtStartup = false)
+@TopComponent.Registration(mode = "navigator", openAtStartup = false)
 @ActionID(category = "Window", id = "cz.inseo.netbeans.github.gist.GistTopComponent")
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_GistAction",
 preferredID = "GistTopComponent")
 public final class GistTopComponent extends TopComponent {
-		
-	public GistTopComponent(){
+	
+	private GistsTree gistTree;
+
+	public GistTopComponent() {
 		initComponents();
 		setName(NbBundle.getMessage(GistTopComponent.class, "CTL_GistTopComponent"));
 		setToolTipText(NbBundle.getMessage(GistTopComponent.class, "HINT_GistTopComponent"));
-				
 	}
-	
+
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -57,8 +46,9 @@ public final class GistTopComponent extends TopComponent {
         newButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        GistTree gTree = new GistTree();
-        gistTree = gTree.getTree();
+        String title = NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.gistTree.root.title");
+        String userName = GithubOptions.getInstance().getLogin();
+        javax.swing.JTree gistTree = new GistsTree(title, userName);
 
         org.openide.awt.Mnemonics.setLocalizedText(newButton, org.openide.util.NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.newButton.text")); // NOI18N
 
@@ -70,6 +60,7 @@ public final class GistTopComponent extends TopComponent {
         });
 
         jScrollPane1.setViewportView(gistTree);
+        this.gistTree = (GistsTree) gistTree;
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,54 +90,21 @@ public final class GistTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-		String title = NbBundle.getMessage(GistTree.class, "GistTree.title");
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode(new IconData(GistTree.ICON_ROOT, null, title));
-
-		DefaultTreeModel m_model = new DefaultTreeModel(top);
-		
-		DefaultMutableTreeNode node;
-		GistService gistService = GithubAuth.getGistService();
-
-		List<Gist> gists;
-		try {
-			gists = gistService.getGists(GithubOptions.getInstance().getLogin());
-			for (Iterator<Gist> it = gists.iterator(); it.hasNext();) {
-				Gist gist = it.next();
-
-				ImageIcon icon;
-
-				if (gist.isPublic() == true) {
-					icon = GistTree.ICON_PUBLIC;
-				} else {
-					icon =  GistTree.ICON_PRIVATE;
-				}
-
-				node = new DefaultMutableTreeNode(new IconData(icon, null, new GistNode(gist)));
-				top.add(node);
-				node.add(new DefaultMutableTreeNode(true));
-
-			}
-		} catch (IOException ex) {
-			Exceptions.printStackTrace(ex);
-		}
-		
-		gistTree.setModel(m_model);
+		gistTree.reload();
 	}//GEN-LAST:event_refreshButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTree gistTree;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newButton;
     private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
+
 	@Override
 	public void componentOpened() {
-		// TODO add custom code on component opening
+		
 	}
 
 	@Override
 	public void componentClosed() {
-		// TODO add custom code on component closing
 	}
 
 	void writeProperties(java.util.Properties p) {
@@ -160,4 +118,114 @@ public final class GistTopComponent extends TopComponent {
 		String version = p.getProperty("version");
 		// TODO read your settings according to their version
 	}
+
+	private void initTree() {
+		
+		String title = NbBundle.getMessage(GistTopComponent.class, "GistTopComponent.gistTree.root.title");
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode(title);
+
+		TreeCellRenderer renderer = new IconCellRenderer();
+		//gistTree.setCellRenderer(renderer);
+		
+		DefaultTreeModel treeModel = new DefaultTreeModel(top);
+		//gistTree.setModel(treeModel);
+
+		/*
+				Map<String, GistFile> files = gist.getFiles();
+				if (!files.isEmpty()) {
+					Iterator iterator = files.keySet().iterator();// Iterate on keys
+					FileNode fileNode;
+					DefaultMutableTreeNode childNode;
+
+					while (iterator.hasNext()) {
+						String key = (String) iterator.next();
+						fileNode = new FileNode(files.get(key));
+						childNode = new DefaultMutableTreeNode(fileNode);
+						//FileUtil.getMIMEType(null)
+
+
+						try {
+						
+						FileSystem mfs = FileUtil.createMemoryFileSystem();
+						FileObject gFolder = mfs.getRoot().createFolder(gist.getId());
+						FileObject fob = gFolder.createData("mujsoubor", "txt");
+						//OutputStream oStream = fob.getOutputStream();
+						 
+						String content = files.get(key).getRawUrl();
+						InputStream openStream = new URL(content).openStream();
+						InputStreamReader reader = new InputStreamReader(openStream);
+						InfoDialog.showInfo(reader.getEncoding());
+						
+						try {
+						Gson gson = new Gson();
+						String fromJson = gson.fromJson(reader, String.class);
+						InfoDialog.showInfo(fromJson);
+						} catch (JsonParseException jpe) {
+						throw new IOException(jpe.getMessage());
+						} finally {
+						try {
+						reader.close();
+						} catch (IOException ignored) {
+						// Ignored
+						}
+						}
+
+
+						reader.close();
+
+						openStream.read();
+						if (content != null) {
+							InfoDialog.showInfo(content);
+							/*	oStream.write();
+							oStream.flush();
+							oStream.close();
+						}
+						/*
+						DataObject data = DataObject.find(fob);
+						EditorCookie cookie = data.getCookie(EditorCookie.class);
+						cookie.open();
+						
+						} catch (DataObjectNotFoundException ex) {
+						Exceptions.printStackTrace(ex);
+						} catch (IOException ex) {
+						Exceptions.printStackTrace(ex);
+						}
+
+
+
+						node.add(childNode);
+					}*/
+			
+
+		
+
+	}
+/*
+	private void reloadTree() {
+		DefaultTreeModel treeModel = (DefaultTreeModel) gistTree.getModel();
+		DefaultMutableTreeNode top = (DefaultMutableTreeNode) treeModel.getRoot();
+
+
+		GistService gistService = GithubAuth.getGistService();
+		String user = GithubOptions.getInstance().getLogin();
+
+		try {
+			List<Gist> gists = gistService.getGists(user);
+			DefaultMutableTreeNode gNode;
+
+			top.removeAllChildren();
+
+			for (Iterator<Gist> it = gists.iterator(); it.hasNext();) {
+				Gist gist = it.next();
+				gNode = new DefaultMutableTreeNode(new GistNode(gist));
+				top.add(gNode);
+			}
+			
+			treeModel.reload(top);
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		}
+	}*/
+	
 }
+

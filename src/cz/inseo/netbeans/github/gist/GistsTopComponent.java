@@ -1,5 +1,6 @@
 package cz.inseo.netbeans.github.gist;
 
+import cz.inseo.netbeans.github.options.GithubOptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -8,7 +9,6 @@ import org.openide.awt.ActionReference;
 import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.ExplorerUtils;
 import org.openide.explorer.view.BeanTreeView;
-import org.openide.nodes.AbstractNode;
 
 /**
  * Top component which displays something.
@@ -29,12 +29,9 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 
 	public GistsTopComponent() {
 		initComponents();
+		initExplorerManager();
 		setName(NbBundle.getMessage(GistsTopComponent.class, "CTL_GistsTopComponent"));
-		setToolTipText(NbBundle.getMessage(GistsTopComponent.class, "HINT_GistsTopComponent"));
-
-		associateLookup(ExplorerUtils.createLookup(explorerManager, getActionMap()));
-		explorerManager.setRootContext(new AbstractNode(new GistChildren()));
-		explorerManager.getRootContext().setDisplayName("Marilyn Monroe's Movies");
+		setToolTipText(NbBundle.getMessage(GistsTopComponent.class, "HINT_GistsTopComponent"));		
 	}
 
 	/** This method is called from within the constructor to
@@ -50,6 +47,7 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
         setLayout(new java.awt.BorderLayout());
         add(gistsPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane gistsPane;
     // End of variables declaration//GEN-END:variables
@@ -79,5 +77,16 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 	@Override
 	public ExplorerManager getExplorerManager() {
 		return explorerManager;
+	}
+	
+	private void initExplorerManager(){
+		associateLookup(ExplorerUtils.createLookup(explorerManager, getActionMap()));
+		initExplorerManagerContext();
+	}
+	
+	private void initExplorerManagerContext(){
+		String userName = GithubOptions.getInstance().getLogin();
+		explorerManager.setRootContext(new RootNode(new GistChildren(userName)));
+		explorerManager.getRootContext().setDisplayName(userName+"'s Gists");
 	}
 }

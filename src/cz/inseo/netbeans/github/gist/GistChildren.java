@@ -1,12 +1,8 @@
 package cz.inseo.netbeans.github.gist;
 
 import cz.inseo.netbeans.github.GithubAuth;
-import cz.inseo.netbeans.github.options.GithubOptions;
-import cz.inseo.netbeans.github.tools.InfoDialog;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-import javax.swing.tree.DefaultMutableTreeNode;
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.GistService;
@@ -20,8 +16,11 @@ import org.openide.util.Exceptions;
  * @author Pavel Máca <maca.pavel@gmail.com>
  */
 public class GistChildren extends Children.Keys {
+	
+	private String userName;
 
-	public GistChildren() {
+	public GistChildren(String userName) {
+		this.userName = userName;
 	}
 
 	@Override
@@ -33,13 +32,16 @@ public class GistChildren extends Children.Keys {
 	@Override
 	protected void addNotify() {
         super.addNotify();
-		
+		reload();		
+    }
+	
+	public void reload(){
 		/* Load gists from github */
 		GistService gistService = GithubAuth.getGistService();
 
 		
 		try {
-			List<Gist> gists = gistService.getGists(GithubOptions.getInstance().getLogin());
+			List<Gist> gists = gistService.getGists(userName);
 			
 			Gist[] objs = new Gist[gists.size()];
 			
@@ -49,10 +51,10 @@ public class GistChildren extends Children.Keys {
 			
 			setKeys(objs);
 		} catch (RequestException ex){
-			InfoDialog.showError(ex.getMessage());
-			
+			GithubAuth.processException(ex);
 		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
-		}        
-    }
+		}  
+	}
+	
 }

@@ -1,5 +1,8 @@
 package cz.inseo.netbeans.github.gist;
 
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.Action;
 import org.eclipse.egit.github.core.GistFile;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
@@ -15,10 +18,11 @@ public class FileNode extends AbstractNode {
 	
 	/** Creates a new instance of FileNode */
     public FileNode(GistFile key) {
-        super(Children.LEAF, Lookups.fixed( new Object[] {key} ) );
+        super(Children.LEAF, Lookups.singleton(key));
         this.file = key;
         setDisplayName(key.getFilename());
-        setIconBaseWithExtension("org/netbeans/myfirstexplorer/marilyn.gif");
+        setIconBaseWithExtension("cz/inseo/netbeans/github/resources/images/paste.png");
+		
     }
     
 	
@@ -32,4 +36,10 @@ public class FileNode extends AbstractNode {
     public boolean canDestroy() {
         return false;
     }
+
+	@Override
+	public Action getPreferredAction() {
+		return new FilePreferredAction();
+	}
+		
 }

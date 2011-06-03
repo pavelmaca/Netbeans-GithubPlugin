@@ -83,10 +83,6 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 	
 	private void initExplorerManager(){
 		associateLookup(ExplorerUtils.createLookup(explorerManager, getActionMap()));
-		initExplorerManagerContext();
-	}
-	
-	private void initExplorerManagerContext(){
 		String userName = GithubOptions.getInstance().getLogin();
 		explorerManager.setRootContext(new RootNode(new GistChildren(userName)));
 		explorerManager.getRootContext().setDisplayName(userName+"'s Gists");

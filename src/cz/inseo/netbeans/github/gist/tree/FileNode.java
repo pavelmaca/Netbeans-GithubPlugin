@@ -47,5 +47,5 @@ public class FileNode extends AbstractNode {
 	public Action getPreferredAction() {
 		return new FilePreferredAction();
 	}
-		
+			
 }

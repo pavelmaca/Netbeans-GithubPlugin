@@ -31,4 +31,9 @@ public class RootNode extends AbstractNode {
 	public Action[] getActions(boolean context) {
 		return new Action[] { new RootAction() };
 	}
+	
+	@Override
+	public Action getPreferredAction() {
+		return new RootPreferredAction();
+	}
 }

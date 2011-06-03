@@ -31,7 +31,7 @@ public class GistChildren extends Children.Keys {
 	@Override
 	protected void addNotify() {
         super.addNotify();
-		reload();		
+		//reload();		
     }
 	
 	public void reload(){

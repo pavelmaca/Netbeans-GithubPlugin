@@ -7,6 +7,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.ExplorerUtils;
+import org.openide.explorer.view.BeanTreeView;
 import org.openide.nodes.AbstractNode;
 
 /**
@@ -32,7 +33,7 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 		setToolTipText(NbBundle.getMessage(GistsTopComponent.class, "HINT_GistsTopComponent"));
 
 		associateLookup(ExplorerUtils.createLookup(explorerManager, getActionMap()));
-		//explorerManager.setRootContext(new AbstractNode());
+		explorerManager.setRootContext(new AbstractNode(new GistChildren()));
 		explorerManager.getRootContext().setDisplayName("Marilyn Monroe's Movies");
 	}
 
@@ -44,21 +45,13 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        gistsPane = new BeanTreeView();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.BorderLayout());
+        add(gistsPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane gistsPane;
     // End of variables declaration//GEN-END:variables
 
 	@Override

@@ -2,7 +2,7 @@ package cz.inseo.netbeans.github.gist;
 
 import cz.inseo.netbeans.github.gist.tree.RootNode;
 import cz.inseo.netbeans.github.gist.tree.GistChildren;
-import cz.inseo.netbeans.github.options.GithubOptions;
+import cz.inseo.netbeans.github.options.GitHubOptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -83,7 +83,7 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 	
 	private void initExplorerManager(){
 		associateLookup(ExplorerUtils.createLookup(explorerManager, getActionMap()));
-		String userName = GithubOptions.getInstance().getLogin();
+		String userName = GitHubOptions.getInstance().getLogin();
 		explorerManager.setRootContext(new RootNode(new GistChildren(GistChildren.ROOT_USER)));
 		explorerManager.getRootContext().setDisplayName(userName+"'s Gists");
 	}

@@ -8,12 +8,12 @@ import org.openide.util.HelpCtx;
 import org.openide.util.Lookup;
 
 @OptionsPanelController.SubRegistration(location = "Advanced",
-displayName = "#AdvancedOption_DisplayName_Github",
-keywords = "#AdvancedOption_Keywords_Github",
-keywordsCategory = "Advanced/Github")
-public final class GithubOptionsPanelController extends OptionsPanelController {
+displayName = "#AdvancedOption_DisplayName_GitHub",
+keywords = "#AdvancedOption_Keywords_GitHub",
+keywordsCategory = "Advanced/GitHub")
+public final class GitHubOptionsPanelController extends OptionsPanelController {
 
-	private GithubPanel panel;
+	private GitHubPanel panel;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private boolean changed;
 
@@ -64,9 +64,9 @@ public final class GithubOptionsPanelController extends OptionsPanelController {
 		pcs.removePropertyChangeListener(l);
 	}
 
-	private GithubPanel getPanel() {
+	private GitHubPanel getPanel() {
 		if (panel == null) {
-			panel = new GithubPanel(this);
+			panel = new GitHubPanel(this);
 		}
 		return panel;
 	}

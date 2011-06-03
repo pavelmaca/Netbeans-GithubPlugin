@@ -1,7 +1,7 @@
 package cz.inseo.netbeans.github.gist.tree;
 
-import cz.inseo.netbeans.github.GithubAuth;
-import cz.inseo.netbeans.github.options.GithubOptions;
+import cz.inseo.netbeans.github.GitHubAuth;
+import cz.inseo.netbeans.github.options.GitHubOptions;
 import cz.inseo.netbeans.github.tools.InfoDialog;
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +42,7 @@ public class GistChildren extends Children.Keys {
 		//fix bug when user change option when instance already exist
 		String l_userName;
 		if(userName.equals(ROOT_USER)){
-			l_userName = GithubOptions.getInstance().getLogin();
+			l_userName = GitHubOptions.getInstance().getLogin();
 		}else{
 			l_userName = userName;
 		}
@@ -53,7 +53,7 @@ public class GistChildren extends Children.Keys {
 		}
 
 		/* Load gists from github */
-		GistService gistService = GithubAuth.getGistService();
+		GistService gistService = GitHubAuth.getGistService();
 
 		
 		try {
@@ -67,7 +67,7 @@ public class GistChildren extends Children.Keys {
 			
 			setKeys(objs);
 		} catch (RequestException ex){
-			GithubAuth.processException(ex);
+			GitHubAuth.processException(ex);
 		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
 		}  

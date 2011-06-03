@@ -29,7 +29,7 @@ public class GistNode extends AbstractNode {
 	public String getGistId(){
 		return gist.getId();
 	}
-
+	
 	@Override
 	public Action[] getActions(boolean context) {
 		//return new Action[] { new GistAction() };

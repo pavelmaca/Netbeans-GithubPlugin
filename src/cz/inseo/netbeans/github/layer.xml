@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
-<filesystem/>
+<filesystem>
+    <folder name="OptionsDialog">
+        <folder name="Advanced">
+            <file name="cz-inseo-netbeans-github-options-GitHubOptionsPanelController.instance" url="cz-inseo-netbeans-github-options-GitHubOptionsPanelController.instance">
+                <attr name="keywords" stringvalue="Configure GitHub plugin"/>
+                <attr name="keywordsCategory" stringvalue="Advanced/GitHub"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

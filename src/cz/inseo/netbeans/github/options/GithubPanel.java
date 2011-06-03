@@ -34,10 +34,8 @@ final class GitHubPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(passwordLabel, org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.passwordLabel.text")); // NOI18N
 
         userNameText.setText(org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.userNameText.text")); // NOI18N
-        userNameText.setNextFocusableComponent(passwordField);
 
         org.openide.awt.Mnemonics.setLocalizedText(loginButton, org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.loginButton.text")); // NOI18N
-        loginButton.setNextFocusableComponent(userNameText);
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -45,7 +43,6 @@ final class GitHubPanel extends javax.swing.JPanel {
         });
 
         passwordField.setText(org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.passwordField.text")); // NOI18N
-        passwordField.setNextFocusableComponent(loginButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(statusLabel, org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.statusLabel.text")); // NOI18N
 

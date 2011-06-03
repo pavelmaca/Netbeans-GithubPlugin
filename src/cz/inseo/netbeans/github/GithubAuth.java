@@ -26,7 +26,7 @@ public class GithubAuth {
 				message = "Unknown status code: " + Integer.toString(ex.getStatus());
 				break;
 		}
-		InfoDialog.showInfo(message);
+		InfoDialog.showError(message);
 	}
 
 	public static boolean tryLogin() {

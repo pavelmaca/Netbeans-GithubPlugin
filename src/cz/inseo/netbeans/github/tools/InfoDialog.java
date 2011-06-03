@@ -10,7 +10,15 @@ import org.openide.NotifyDescriptor;
 public class InfoDialog {
 
 	public static void showInfo(String message) {
-		NotifyDescriptor d = new NotifyDescriptor.Message( message, NotifyDescriptor.INFORMATION_MESSAGE);
+		notify(message, NotifyDescriptor.INFORMATION_MESSAGE);
+	}
+	
+	public static void showError(String message){
+		notify(message, NotifyDescriptor.ERROR_MESSAGE);
+	}
+	
+	private static void notify(String message, int flag){
+		NotifyDescriptor d = new NotifyDescriptor.Message( message, flag);
 		DialogDisplayer.getDefault().notify(d);
 	}
 }

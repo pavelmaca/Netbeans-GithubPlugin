@@ -17,16 +17,7 @@ import org.openide.util.Exceptions;
 public class GithubAuth {
 
 	public static void processException(RequestException ex) {
-		String message;
-		switch (ex.getStatus()) {
-			case 401:
-				message = "Incorrect login";
-				break;
-			default:
-				message = "Unknown status code: " + Integer.toString(ex.getStatus());
-				break;
-		}
-		InfoDialog.showError(message);
+		InfoDialog.showError("Github plugin: "+ex.getError().getMessage());
 	}
 
 	public static boolean tryLogin() {

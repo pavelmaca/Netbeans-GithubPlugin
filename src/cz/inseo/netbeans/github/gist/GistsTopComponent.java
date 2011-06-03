@@ -18,7 +18,7 @@ import org.openide.explorer.view.BeanTreeView;
 @ConvertAsProperties(dtd = "-//cz.inseo.netbeans.github.gist//Gists//EN",
 autostore = false)
 @TopComponent.Description(preferredID = "GistsTopComponent",
-//iconBase="SET/PATH/TO/ICON/HERE", 
+iconBase="cz/inseo/netbeans/github/resources/images/g-icon.png", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "explorer", openAtStartup = false)
 @ActionID(category = "Window", id = "cz.inseo.netbeans.github.gist.GistsTopComponent")

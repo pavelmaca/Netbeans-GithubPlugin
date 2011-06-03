@@ -16,7 +16,7 @@ import org.openide.util.Exceptions;
  */
 public class GithubAuth {
 
-	private static void processException(RequestException ex) {
+	public static void processException(RequestException ex) {
 		String message;
 		switch (ex.getStatus()) {
 			case 401:

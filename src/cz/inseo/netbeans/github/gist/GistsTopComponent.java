@@ -1,5 +1,7 @@
 package cz.inseo.netbeans.github.gist;
 
+import cz.inseo.netbeans.github.gist.tree.RootNode;
+import cz.inseo.netbeans.github.gist.tree.GistChildren;
 import cz.inseo.netbeans.github.options.GithubOptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;

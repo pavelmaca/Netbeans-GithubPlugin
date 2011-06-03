@@ -1,4 +1,4 @@
-package cz.inseo.netbeans.github.gist;
+package cz.inseo.netbeans.github.gist.tree;
 
 import cz.inseo.netbeans.github.GithubAuth;
 import java.io.IOException;

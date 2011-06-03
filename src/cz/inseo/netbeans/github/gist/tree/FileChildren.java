@@ -1,4 +1,4 @@
-package cz.inseo.netbeans.github.gist;
+package cz.inseo.netbeans.github.gist.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;

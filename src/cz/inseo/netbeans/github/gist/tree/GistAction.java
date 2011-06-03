@@ -1,4 +1,4 @@
-package cz.inseo.netbeans.github.gist;
+package cz.inseo.netbeans.github.gist.tree;
 
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;

@@ -1,4 +1,4 @@
-package cz.inseo.netbeans.github.gist;
+package cz.inseo.netbeans.github.gist.tree;
 
 import javax.swing.Action;
 import org.eclipse.egit.github.core.GistFile;

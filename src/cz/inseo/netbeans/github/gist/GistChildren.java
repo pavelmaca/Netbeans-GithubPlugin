@@ -7,7 +7,6 @@ import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.GistService;
 import org.openide.nodes.Children;
-
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 

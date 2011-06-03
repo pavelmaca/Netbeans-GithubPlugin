@@ -1,5 +1,6 @@
 package cz.inseo.netbeans.github.gist;
 
+import cz.inseo.netbeans.github.VirtualFileSystem;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.NodeAction;
@@ -12,8 +13,15 @@ public class FilePreferredAction extends NodeAction {
 
 	@Override
 	protected void performAction(Node[] activatedNodes) {
-		//open file in editor
-		throw new UnsupportedOperationException("Not supported yet.1");
+		FileNode node;
+		
+		for (int i= 0; i < activatedNodes.length; i++) {
+			if(activatedNodes[i] instanceof FileNode){
+				node = (FileNode) activatedNodes[i];
+				//open file in editor
+				VirtualFileSystem.getIstance().openGistFile(node.getFile(), node.getGistId());
+			}
+		}
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package cz.inseo.netbeans.github.gist;
 
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import javax.swing.Action;
 import org.eclipse.egit.github.core.GistFile;
 import org.openide.nodes.AbstractNode;
@@ -24,6 +22,14 @@ public class FileNode extends AbstractNode {
         setIconBaseWithExtension("cz/inseo/netbeans/github/resources/images/paste.png");
 		
     }
+	
+	public GistFile getFile(){
+		return file;
+	}
+	
+	public String getGistId(){
+		return ((GistNode) getParentNode()).getGistId();
+	}
     
 	
 	@Override

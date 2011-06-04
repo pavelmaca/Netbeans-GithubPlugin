@@ -36,8 +36,14 @@ public class GitHubAuth {
 	}
 
 	public static GistService getGistService() {
+		return getGistService(true);
+	}
+	
+	public static GistService getGistService(boolean useLogin){
 		GitHubClient client = new GitHubClient();
-		client.setCredentials(GitHubOptions.getInstance().getLogin(), GitHubOptions.getInstance().getPassword());
+		if(useLogin == true){	
+			client.setCredentials(GitHubOptions.getInstance().getLogin(), GitHubOptions.getInstance().getPassword());
+		}
 		return new GistService(client);
 	}
 }

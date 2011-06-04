@@ -38,6 +38,7 @@ public class GistChildren extends Children.Keys {
 		//reload();		
     }
 	
+	@SuppressWarnings("unchecked")
 	public void reload(){
 		//fix bug when user change option when instance already exist
 		String l_userName;
@@ -59,13 +60,7 @@ public class GistChildren extends Children.Keys {
 		try {
 			List<Gist> gists = gistService.getGists(l_userName);
 			
-			Gist[] objs = new Gist[gists.size()];
-			
-			for(int i = 0; i < gists.size(); i++){
-				objs[i] = gists.get(i);
-			}
-			
-			setKeys(objs);
+			setKeys(gists.toArray());			
 		} catch (RequestException ex){
 			GitHubAuth.processException(ex);
 		} catch (IOException ex) {

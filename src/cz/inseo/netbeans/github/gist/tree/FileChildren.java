@@ -23,7 +23,7 @@ public class FileChildren extends Index.ArrayChildren {
 	protected java.util.List<Node> initCollection() {
 		java.util.Map<String, GistFile> files = gist.getFiles();
 		
-		ArrayList childrenNodes = new ArrayList(files.size());
+		ArrayList<Node> childrenNodes = new ArrayList<Node>(files.size());
 		
 		Iterator iterator = files.keySet().iterator();// Iterate on keys
 		GistFile file;

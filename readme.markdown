@@ -1,5 +1,6 @@
 # Netbeans - GitHub connector
 Projekt home: https://github.com/PavelMaca/Netbeans-GithubPlugin
+
 Author: [Pavel Máca](https://github.com/PavelMaca/)
 
 ## Requirements:

@@ -1,6 +1,11 @@
 package cz.inseo.netbeans.github.options;
 
 import cz.inseo.netbeans.github.GitHubAuth;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.io.IOException;
+import org.eclipse.egit.github.core.client.RequestException;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 
 final class GitHubPanel extends javax.swing.JPanel {
@@ -12,7 +17,7 @@ final class GitHubPanel extends javax.swing.JPanel {
 		initComponents();
 		// TODO listen to changes in form fields and call controller.changed()
 	}
-
+	
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -34,6 +39,11 @@ final class GitHubPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(passwordLabel, org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.passwordLabel.text")); // NOI18N
 
         userNameText.setText(org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.userNameText.text")); // NOI18N
+        userNameText.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                userNameTextPropertyChange(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(loginButton, org.openide.util.NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.loginButton.text")); // NOI18N
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,13 +114,38 @@ final class GitHubPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+		//check corect login name
+		if (!userNameText.getText().matches("\\w+")) {
+			statusLabel.setText(NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.status.incorrectName"));
+			statusLabel.setForeground(Color.red);
+			return;
+		}
+		
+		
 		store();
-		if (GitHubAuth.tryLogin() == true) {
+		
+		Cursor backup = getCursor();
+		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		loginButton.setEnabled(false);
+		try {
+			GitHubAuth.tryLogin();
 			statusLabel.setText(NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.status.logged"));
-		} else {
-			statusLabel.setText(NbBundle.getMessage(GitHubPanel.class, "GitHubPanel.status.failure"));
+			statusLabel.setForeground(Color.black);
+		} catch (RequestException ex) {
+			statusLabel.setText(ex.getError().getMessage());
+			statusLabel.setForeground(Color.red);
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		}finally{
+			loginButton.setEnabled(true);
+			setCursor(backup);			
 		}
 	}//GEN-LAST:event_loginButtonActionPerformed
+
+	private void userNameTextPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userNameTextPropertyChange
+		
+
+	}//GEN-LAST:event_userNameTextPropertyChange
 
 	void load() {
 		userNameText.setText(GitHubOptions.getInstance().getLogin());

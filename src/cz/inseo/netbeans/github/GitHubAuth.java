@@ -8,31 +8,23 @@ import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.GistService;
-import org.openide.util.Exceptions;
 
 /**
  *
  * @author Pavel Máca <maca.pavel@gmail.com>
  */
 public class GitHubAuth {
-
+	
 	public static void processException(RequestException ex) {
-		InfoDialog.showError("GitHub plugin: "+ex.getError().getMessage());
-	}
+		InfoDialog.showError("GitHub plugin: " + ex.getError().getMessage());
+}
 
-	public static boolean tryLogin() {
+	public static void tryLogin() throws IOException {
 		GitHubClient client = new GitHubClient();
 		client.setCredentials(GitHubOptions.getInstance().getLogin(), GitHubOptions.getInstance().getPassword());
 		GistService gistService = new GistService(client);
-		try {
-			List<Gist> gists = gistService.getGists(GitHubOptions.getInstance().getLogin());
-			return true;
-		} catch (RequestException ex) {
-			processException(ex);
-		} catch (IOException ex) {
-			Exceptions.printStackTrace(ex);
-		}
-		return false;
+
+		List<Gist> gists = gistService.getGists(GitHubOptions.getInstance().getLogin());
 	}
 
 	public static GistService getGistService() {

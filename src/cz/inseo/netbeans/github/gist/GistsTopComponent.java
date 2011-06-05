@@ -23,7 +23,7 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "explorer", openAtStartup = false)
 @ActionID(category = "Window", id = "cz.inseo.netbeans.github.gist.GistsTopComponent")
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
-@TopComponent.OpenActionRegistration(displayName = "#CTL_GistsAction",
+@TopComponent.OpenActionRegistration(displayName = "#CTL_GistsTopComponent",
 preferredID = "GistsTopComponent")
 public final class GistsTopComponent extends TopComponent implements ExplorerManager.Provider {
 
@@ -33,7 +33,6 @@ public final class GistsTopComponent extends TopComponent implements ExplorerMan
 		initComponents();
 		initExplorerManager();
 		setName(NbBundle.getMessage(GistsTopComponent.class, "CTL_GistsTopComponent"));
-		setToolTipText(NbBundle.getMessage(GistsTopComponent.class, "HINT_GistsTopComponent"));		
 	}
 
 	/** This method is called from within the constructor to

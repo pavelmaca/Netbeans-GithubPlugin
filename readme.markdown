@@ -20,11 +20,11 @@ For features of actual version and future versions please visit [wiki: Roadmap](
  - You need to setup Github login first!
  - Can be open in `Window -> Gists Explorer`
 
-###  <del>Creating Gists
- 1. <del> **From code block**
-   -  <del>Select some code in opened file.
-   -  <del>Right click and choose `Create new Gist`
-   -  <del>Review selected code, set description and select Gist privacy.
+###  Creating Gists
+ 1. **From code block**
+   -  Select some code in opened file.
+   -  Right click and choose `Create new Gist`
+   -  Review selected code, set description and select Gist privacy.
 
  2. <del>Creating Gist from project folder and selected files.
   - <del>Right click at and choose `Create new Gist`

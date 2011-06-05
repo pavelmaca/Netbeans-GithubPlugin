@@ -56,7 +56,7 @@ public final class CreateGistAction extends EditAction {
 		final String displayName = activatedNodes[0].getDisplayName();
 
 		final String text = component.getSelectedText();
-		if (!text.isEmpty()) {
+		if (text != null && !text.isEmpty()) {
 			RequestProcessor.getDefault().execute(new Runnable() {
 
 				@Override

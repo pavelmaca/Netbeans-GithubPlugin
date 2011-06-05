@@ -8,6 +8,8 @@ package cz.inseo.netbeans.github.gist;
 
 import cz.inseo.netbeans.github.GitHubAuth;
 import cz.inseo.netbeans.github.options.GitHubOptions;
+import java.awt.Cursor;
+import java.awt.Point;
 import java.io.IOException;
 import java.util.Collections;
 import javax.swing.SwingUtilities;
@@ -64,6 +66,7 @@ public class CreateGistDialog extends java.awt.Dialog {
 	}
 
 	private void createdDialog(final String url) {
+		final Point m_location = getLocation();
 		RequestProcessor.getDefault().execute(new Runnable() {
 
 			@Override
@@ -75,22 +78,15 @@ public class CreateGistDialog extends java.awt.Dialog {
 					public void run() {
 						CreatedDialog createdDialog = new CreatedDialog(null, true);
 						createdDialog.urlText.setText(url);
-						
+						createdDialog.setLocation(m_location);						
 						createdDialog.setFocusableWindowState(true);
 						createdDialog.setVisible(true);
 					}
 				});
 			}
 		});
-
-
-		/*
-		Frame mainWindow = WindowManager.getDefault().getMainWindow();
-		CreatedDialog createdDialog = new CreatedDialog(mainWindow , true);
-		createdDialog.urlText.setText(url);
-		createdDialog.setVisible(true);*/
 	}
-
+	
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -276,6 +272,7 @@ public class CreateGistDialog extends java.awt.Dialog {
 		Gist gist = buildGist();
 		gist.setPublic(false);
 		try {
+			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			Gist createGist = GitHubAuth.getGistService(!anonymousRadio.isSelected()).createGist(gist);
 			createdDialog(createGist.getHtmlUrl());
 			closeDialog(null);
@@ -283,6 +280,8 @@ public class CreateGistDialog extends java.awt.Dialog {
 			GitHubAuth.processException(ex);
 		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
+		}finally{
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
 }//GEN-LAST:event_createPrivateButtonActionPerformed
 
@@ -295,6 +294,7 @@ public class CreateGistDialog extends java.awt.Dialog {
 		Gist gist = buildGist();
 		gist.setPublic(true);
 		try {
+			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			Gist createGist = GitHubAuth.getGistService(!anonymousRadio.isSelected()).createGist(gist);
 			createdDialog(createGist.getHtmlUrl());
 			closeDialog(null);
@@ -302,6 +302,8 @@ public class CreateGistDialog extends java.awt.Dialog {
 			GitHubAuth.processException(ex);
 		} catch (IOException ex) {
 			Exceptions.printStackTrace(ex);
+		}finally{
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
 }//GEN-LAST:event_createPublicButtonActionPerformed
 

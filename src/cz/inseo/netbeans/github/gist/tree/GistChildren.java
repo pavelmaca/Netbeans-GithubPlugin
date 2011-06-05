@@ -28,14 +28,17 @@ public class GistChildren extends Children.Keys {
 
 	@Override
 	protected Node[] createNodes(Object key) {
-		Gist obj = (Gist) key;
-        return new Node[] { new GistNode( obj ) };
+		if(key instanceof Gist){
+			Gist obj = (Gist) key;
+			return new Node[] { new GistNode( obj ) };
+		}else{
+			return new Node[0];
+		}
 	}
 	
 	@Override
 	protected void addNotify() {
         super.addNotify();
-		//reload();		
     }
 	
 	@SuppressWarnings("unchecked")

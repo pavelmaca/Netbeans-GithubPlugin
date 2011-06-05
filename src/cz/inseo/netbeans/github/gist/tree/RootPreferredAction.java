@@ -10,7 +10,19 @@ import org.openide.util.actions.NodeAction;
  */
 public class RootPreferredAction extends NodeAction {
 	
+	private static RootPreferredAction INSTANCE;
+	
 	private static boolean init = true;
+	
+	public static RootPreferredAction getInstance(){
+		if(INSTANCE == null){
+			INSTANCE = new RootPreferredAction();
+		}
+		return INSTANCE;
+	}
+	
+	private RootPreferredAction(){
+	}
 	
 	@Override
 	protected void performAction(Node[] activatedNodes) {

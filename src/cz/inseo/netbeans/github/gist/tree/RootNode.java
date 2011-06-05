@@ -34,6 +34,6 @@ public class RootNode extends AbstractNode {
 	
 	@Override
 	public Action getPreferredAction() {
-		return new RootPreferredAction();
+		return RootPreferredAction.getInstance();
 	}
 }

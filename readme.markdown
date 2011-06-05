@@ -30,5 +30,9 @@ For features of actual version and future versions please visit [wiki: Roadmap](
   - <del>Right click at and choose `Create new Gist`
   - <del>When creating on folder: Gist will be included all files from selected folder!
 
+## Preview
+![Gists Explorer](http://files.ukaz.at/images/full/1j6.png)
+![Gist creation](http://files.ukaz.at/images/full/1j7.png)
+
 ## Warning
 **Written by Java newbie, so no warranty of any kind.**
